@@ -1,28 +1,33 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <a class="navbar-brand" href="#">C</a>
     <a class="navbar-brand" href="#">CURE</a>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" 
+    data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" 
+    aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="navbar-collapse collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" routerLink="/new">New Entry </a>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/new']" routerLinkActive="active"
+          [routerLinkActiveOptions] = "{exact:true}">New Entry </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Log</a>
+          <a class="nav-link" [routerLink]="['/log']" routerLinkActive="active"
+          [routerLinkActiveOptions] = "{exact:true}">Log</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Help</a>
+          <a class="nav-link" [routerLink]="['/help']" routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}">Help</a>
         </li>
       </ul>
       <ul class ="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link">Login</a>
+          <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active"
+          [routerLinkActiveOptions] = "{exact:true}">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link ">Register</a>
+          <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active" [routerLinkActiveOptions] = "{exact:true}">Register</a>
         </li>
       </ul>
     </div>

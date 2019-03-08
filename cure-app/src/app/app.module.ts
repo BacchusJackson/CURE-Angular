@@ -5,12 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NewEntryComponent } from './components/new-entry/new-entry.component';
-
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LogComponent } from './components/log/log.component';
+import { HelpComponent } from './components/help/help.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    NewEntryComponent
+    NewEntryComponent,
+    LoginComponent,
+    RegisterComponent,
+    LogComponent,
+    HelpComponent
   ],
   imports: [
     BrowserModule,
