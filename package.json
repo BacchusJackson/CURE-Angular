@@ -1,0 +1,23 @@
+{
+  "name": "cure-angular",
+  "version": "1.0.0",
+  "description": "CURE Metrics website built with Angular",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BacchusJackson/CURE-Angular.git"
+  },
+  "author": "JaX",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BacchusJackson/CURE-Angular/issues"
+  },
+  "homepage": "https://github.com/BacchusJackson/CURE-Angular#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "nodemon": "^1.18.10"
+  }
+}
