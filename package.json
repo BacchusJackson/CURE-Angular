@@ -18,6 +18,7 @@
   "homepage": "https://github.com/BacchusJackson/CURE-Angular#readme",
   "dependencies": {
     "@material/top-app-bar": "^1.0.0",
+    "aws-sdk": "^2.418.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "http": "0.0.0",
