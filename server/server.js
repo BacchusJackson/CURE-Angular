@@ -22,7 +22,6 @@ app.use(express.static(path.join(__dirname, '../cure-app/dist/cure-app')));
 //sets the api route
 app.use('/api', api);
 
-
 //get any request and return a response
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../cure-app/dist/cure-app/index.html'))
