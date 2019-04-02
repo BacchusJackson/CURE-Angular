@@ -21,6 +21,8 @@ mongoose.connection.on('error', (err) => {
 
 const app = express();
 
+
+//pulls in the route catchers from users
 const users = require('./routes/users');
 
 //sets the port to an enviromental variable or 3000
@@ -31,7 +33,12 @@ app.set('port', port);
 
 //Body Parser Middleware
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+
+//Passport Middleware to handle tokens and user authentication
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('../config/passport')(passport);
 
 app.use('/users', users);
 
