@@ -9,6 +9,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LogComponent } from './components/log/log.component';
 import { HelpComponent } from './components/help/help.component';
+import { ProfileComponent } from './components/profile/profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,8 @@ import { HelpComponent } from './components/help/help.component';
     LoginComponent,
     RegisterComponent,
     LogComponent,
-    HelpComponent
+    HelpComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

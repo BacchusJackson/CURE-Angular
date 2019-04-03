@@ -50,7 +50,7 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 //get any request and return a response
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../cure-app/public/index.html'))
+    res.sendFile(path.join(__dirname, '../public/index.html'))
 });
 
 //starts the server
