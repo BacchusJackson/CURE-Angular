@@ -2,7 +2,17 @@
     <div class="card">
         <h3 class="card-header">Login</h3>
             <div class="card-body">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, obcaecati magni! Dicta veritatis sit tempora, neque, cum, asperiores sunt similique exercitationem tempore assumenda magnam. Doloribus natus voluptatibus eaque minima unde!
+                <form (submit)="onLoginSubmit()">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" [(ngModel)]="username" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" [(ngModel)]="password" name="password">
+                    </div>
+                    <input type="submit" class="btn btn-primary" value="login">
+                </form>    
             </div>
     </div>
 </div>  

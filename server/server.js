@@ -31,6 +31,9 @@ const port = process.env.PORT || 3000;
 //set the port option
 app.set('port', port);
 
+// Cross Orgin Middleware to allow internal server calls
+app.use(cors());
+
 //Body Parser Middleware
 app.use(bodyParser.json());
 
