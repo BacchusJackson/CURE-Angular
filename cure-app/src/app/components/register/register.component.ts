@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
   firstName: String;
   lastName: String;
   password: String;
+  password2: String;
 
   constructor(private validateService: ValidateService, 
     private flashMessage: FlashMessagesService, 
@@ -20,12 +21,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
   onRegisterSubmit() {
     const user = {
       firstName: this.firstName,
       lastName: this.lastName,
-      password: this.password
+      password: this.password,
     }
 
     if(!this.validateService.validateRegister(user)) {

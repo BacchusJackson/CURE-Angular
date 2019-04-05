@@ -21,8 +21,8 @@
         </li>
       </ul>
       <!-- Left Side of navbar -->
-      <ul class ="navbar-nav ml-auto" routerLinkActive="active" [routerLinkActiveOptions] = "{exact:true}">
-        <li *ngIf="!authService.loggedIn()" class="nav-item">
+      <ul class ="navbar-nav ml-auto">
+        <li *ngIf="!authService.loggedIn()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions] = "{exact:true}">
           <a class="nav-link" [routerLink]="['/login']">Login</a>
         </li>
         <li *ngIf="!authService.loggedIn()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions] = "{exact:true}">

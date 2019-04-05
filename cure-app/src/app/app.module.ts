@@ -4,6 +4,9 @@ import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from "@angular/http";
 import { FlashMessagesModule, FlashMessagesService } from "angular2-flash-messages";
+import {MatTabsModule} from '@angular/material/tabs';
+import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -33,9 +36,13 @@ import { AuthGuard } from './guards/auth.guard';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    FlashMessagesModule
+    FlashMessagesModule,
+    MatTabsModule,
+    BrowserAnimationsModule
   ],
   providers: [ValidateService, FlashMessagesService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule);
