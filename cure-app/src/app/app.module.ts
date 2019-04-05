@@ -15,6 +15,7 @@ import { HelpComponent } from './components/help/help.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
 import { ValidateService } from "./services/validate.service";
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { ValidateService } from "./services/validate.service";
     AppRoutingModule,
     FlashMessagesModule
   ],
-  providers: [ValidateService, FlashMessagesService],
+  providers: [ValidateService, FlashMessagesService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
