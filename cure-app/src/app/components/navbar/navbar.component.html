@@ -1,39 +1,17 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <a class="navbar-brand" href="#">C</a>
-    <a class="navbar-brand" href="#">CURE</a>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" 
-    data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" 
-    aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="navbar-collapse collapse" id="navbarColor01">
-      <!-- Right Side of navbar -->
-      <ul class="navbar-nav mr-auto">
-        <li *ngIf="authService.loggedIn()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions] = "{exact:true}">
-          <a class="nav-link" [routerLink]="['/new']">New Entry</a>
-        </li>
-        <li *ngIf="authService.loggedIn()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions] = "{exact:true}">
-          <a class="nav-link" [routerLink]="['/log']">Log</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions] = "{exact:true}">
-          <a class="nav-link" [routerLink]="['/help']">Help</a>
-        </li>
-      </ul>
-      <!-- Left Side of navbar -->
-      <ul class ="navbar-nav ml-auto">
-        <li *ngIf="!authService.loggedIn()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions] = "{exact:true}">
-          <a class="nav-link" [routerLink]="['/login']">Login</a>
-        </li>
-        <li *ngIf="!authService.loggedIn()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions] = "{exact:true}">
-          <a class="nav-link" [routerLink]="['/register']">Register</a>
-        </li>
-        <li *ngIf="authService.loggedIn()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions] = "{exact:true}">
-          <a class="nav-link" [routerLink]="['/profile']">Profile</a>
-        </li>
-        <li *ngIf="authService.loggedIn()" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions] = "{exact:true}">
-          <a class="nav-link" href="#" (click)="onLogoutClick()">Logout</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+<mat-toolbar color="primary" class="CURE-toolbar">
+  <!-- Aligned left -->
+  <span>CURE</span>
+  <span class="CURE-toolbar-divider"></span>
+  <!-- Alligned right -->
+
+  <mat-menu #appMenu="matMenu" yPosition="below">
+    <button mat-menu-item [routerLink]="['/login']" routerLinkActive="active" >Login</button>
+    <button mat-menu-item [routerLink]="['/register']" routerLinkActive="active" >Register</button>
+  </mat-menu>
+
+  <button mat-icon-button [matMenuTriggerFor]="appMenu">
+   <mat-icon>account_box</mat-icon>
+   <mat-icon>expand_more</mat-icon>
+  </button>
+
+</mat-toolbar>

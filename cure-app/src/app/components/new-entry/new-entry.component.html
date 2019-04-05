@@ -1,40 +1,38 @@
-<div class="col-6 offset-3">
-    <div class="card">
-        <h3 class="card-header">New Entry</h3>
-            <div class="card-body">
-                <form (submit)="onSubmit()">
-                    <div class="form-group">
-                        <label>Activity</label>
-                        <select class="custom-select">
-                            <option *ngFor="let activity of activities" [value]="activity">{{activity}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Number of Hours</label>
-                        <input type="text" class="form-control" [(ngModel)]="hours" name="hours">
-                    </div>
-                    <div class="form-group">
-                        <label>Members Engaged</label>
-                        <input type="text" class="form-control" [(ngModel)]="members" name="members">
-                    </div>
-                    <input type="submit" class="btn btn-primary" value="submit">
-                </form>   
-            </div>
-    </div>
-</div>
-
-<div class="col-6 offset-3">
-    <div class="card">
-        <h3 class="card-header">New Activity</h3>
-        <div class="card-body">
-            <mat-tab-group>
-                <mat-tab label="One">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et natus ullam nihil quasi excepturi! Atque porro necessitatibus velit molestiae deserunt officiis ducimus molestias quisquam qui. Perferendis sit quam cupiditate distinctio.</p>
-                </mat-tab>
-                <mat-tab label="One">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et natus ullam nihil quasi excepturi! Atque porro necessitatibus velit molestiae deserunt officiis ducimus molestias quisquam qui. Perferendis sit quam cupiditate distinctio.</p>
-                </mat-tab>
-            </mat-tab-group>
-        </div>
-    </div>
-</div>
+<mat-tab-group>
+    <mat-tab label="Unit Engagement">
+            <mat-card style="margin-top:2%; margin-bottom: 10%">
+                    <h3>Activity</h3>
+                    <mat-card-content>
+                            <form (submit)="onSubmit('Unit Engagement')">
+                                <mat-form-field>
+                                    <input matInput placeholder="Hours" [(ngModel)]="hours" name="hours">
+                                </mat-form-field>
+                                <br>
+                                <mat-form-field>
+                                    <input matInput placeholder="Members"[(ngModel)]="members" name="members">
+                                </mat-form-field>
+                                <br>
+                                <!-- <input mat-button type="submit" class="btn btn-primary" value="login"> -->
+                            </form>
+                    </mat-card-content>
+                    <mat-card-actions>
+                
+                        <button mat-raised-button color="primary" style="width: 90%" (click)="onSubmit('Unit Engagement')">Add</button>
+                        <br>
+                        <button mat-button style="width: 90%">clear</button>
+                    </mat-card-actions>
+                </mat-card>
+    </mat-tab>
+    <mat-tab label="Individual Coaching & Counseling">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et natus ullam nihil quasi excepturi! Atque porro necessitatibus velit molestiae deserunt officiis ducimus molestias quisquam qui. Perferendis sit quam cupiditate distinctio.</p>
+    </mat-tab>
+    <mat-tab label="Leader Consultation">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et natus ullam nihil quasi excepturi! Atque porro necessitatibus velit molestiae deserunt officiis ducimus molestias quisquam qui. Perferendis sit quam cupiditate distinctio.</p>
+    </mat-tab>
+    <mat-tab label="Training">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et natus ullam nihil quasi excepturi! Atque porro necessitatibus velit molestiae deserunt officiis ducimus molestias quisquam qui. Perferendis sit quam cupiditate distinctio.</p>
+    </mat-tab>
+    <mat-tab label="Treatment">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et natus ullam nihil quasi excepturi! Atque porro necessitatibus velit molestiae deserunt officiis ducimus molestias quisquam qui. Perferendis sit quam cupiditate distinctio.</p>
+    </mat-tab>
+</mat-tab-group>

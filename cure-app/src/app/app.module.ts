@@ -4,9 +4,19 @@ import { FormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from "@angular/http";
 import { FlashMessagesModule, FlashMessagesService } from "angular2-flash-messages";
-import {MatTabsModule} from '@angular/material/tabs';
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { FlexLayoutModule } from "@angular/flex-layout";
+
+//Material Design Stuff
+import {MatTabsModule} from '@angular/material/tabs';
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatMenuModule } from "@angular/material/menu";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule, MatCard } from "@angular/material/card";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -38,7 +48,15 @@ import { AuthGuard } from './guards/auth.guard';
     AppRoutingModule,
     FlashMessagesModule,
     MatTabsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    FlexLayoutModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [ValidateService, FlashMessagesService, AuthGuard],
   bootstrap: [AppComponent]
