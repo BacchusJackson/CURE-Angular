@@ -10,6 +10,8 @@ export class NewEntryComponent implements OnInit {
   activities: any;
   hours: number;
   members: number;
+  activitySelect: object;
+  activeForm: string;
   
   constructor() { 
 
@@ -20,7 +22,14 @@ export class NewEntryComponent implements OnInit {
     
   }
 
-  onSubmit() {
-    console.log('submit button clicked');
+
+  onSubmit(activeForm) {
+    console.log('submit button clicked on '+activeForm);
   }
+
+  onClear() {
+    this.hours=null;
+    this.members=null;
+  }
+
 }

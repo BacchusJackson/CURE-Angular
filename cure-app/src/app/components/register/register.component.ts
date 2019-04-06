@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidateService } from "../../services/validate.service";
-import { FlashMessagesService } from "angular2-flash-messages";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material";
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -15,9 +16,9 @@ export class RegisterComponent implements OnInit {
   password2: String;
 
   constructor(private validateService: ValidateService, 
-    private flashMessage: FlashMessagesService, 
     private authService:AuthService,
-    private router:Router) { }
+    private router:Router,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -28,17 +29,23 @@ export class RegisterComponent implements OnInit {
       lastName: this.lastName,
       password: this.password,
     }
-
+    //Check if passwords match
+    if(user.password!==this.password2) {
+      this.snackBar.open('Your passwords are not matching...', 'dismiss', {duration:3000});
+      return false
+    }
+    //validate the user information with the database
     if(!this.validateService.validateRegister(user)) {
-      this.flashMessage.show('Cannot submit blank fields', {cssClass: 'alert-danger', timeout: 3000});
+      this.snackBar.open('You missed something!', 'dismiss', {duration:3000})
+      return false
     }
     // Register user
     this.authService.registerUser(user).subscribe(data => {
       if(data.success){
-        this.flashMessage.show('You have been sucessfully registered! You can now login', {cssClass: 'alert-success', timeout: 3000});
+        this.snackBar.open('You account is pending approval however, You can log in now!', 'ok',{duration:3000})
         this.router.navigate(['/login']);
       } else {
-        this.flashMessage.show('Whoops... Something is broken, send help', {cssClass: 'alert-danger', timeout: 3000});
+        this.snackBar.open('Whoops... Something is broken! Call for help', 'dimiss', {duration: 3000});
         this.router.navigate(['/register']);
         
       }

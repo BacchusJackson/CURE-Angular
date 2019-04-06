@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from "@angular/http";
 import { FlashMessagesModule, FlashMessagesService } from "angular2-flash-messages";
@@ -17,6 +17,8 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule, MatCard } from "@angular/material/card";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { MatSelectModule } from "@angular/material/select";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -56,7 +58,10 @@ import { AuthGuard } from './guards/auth.guard';
     MatCardModule,
     FlexLayoutModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   providers: [ValidateService, FlashMessagesService, AuthGuard],
   bootstrap: [AppComponent]
