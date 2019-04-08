@@ -8,10 +8,15 @@ import { map } from "rxjs/operators";
 
 export class DataService {
 
-  constructor() { }
+  constructor(private http:Http) { }
 
-  getCategories() {
+  //call to get all activities
+  getActivities() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
+    return this.http.get('http://localhost:3000/data/allActivities', {headers:headers})
+    .pipe(map(res => res.json()))
   }
+
+
 }

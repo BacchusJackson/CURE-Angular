@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from "@angular/http";
-import { FlashMessagesModule, FlashMessagesService } from "angular2-flash-messages";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -29,6 +28,8 @@ import { LogComponent } from './components/log/log.component';
 import { HelpComponent } from './components/help/help.component';
 import { ProfileComponent } from './components/profile/profile.component';
 
+
+import { DataService } from "./services/data.service";
 import { ValidateService } from "./services/validate.service";
 import { AuthGuard } from './guards/auth.guard';
 
@@ -48,7 +49,6 @@ import { AuthGuard } from './guards/auth.guard';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    FlashMessagesModule,
     MatTabsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -63,7 +63,7 @@ import { AuthGuard } from './guards/auth.guard';
     ReactiveFormsModule,
     MatSnackBarModule
   ],
-  providers: [ValidateService, FlashMessagesService, AuthGuard],
+  providers: [ValidateService, AuthGuard, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

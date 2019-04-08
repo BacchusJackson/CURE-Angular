@@ -12,6 +12,7 @@ import { MatSnackBar } from "@angular/material";
 export class RegisterComponent implements OnInit {
   firstName: String;
   lastName: String;
+  username: String;
   password: String;
   password2: String;
 
@@ -28,17 +29,25 @@ export class RegisterComponent implements OnInit {
       firstName: this.firstName,
       lastName: this.lastName,
       password: this.password,
+      username: this.username
     }
-    //Check if passwords match
-    if(user.password!==this.password2) {
-      this.snackBar.open('Your passwords are not matching...', 'dismiss', {duration:3000});
-      return false
-    }
-    //validate the user information with the database
-    if(!this.validateService.validateRegister(user)) {
-      this.snackBar.open('You missed something!', 'dismiss', {duration:3000})
-      return false
-    }
+
+    let validateTest = this.validateService.validateRegister(user, this.password2);
+
+
+    //check for formatting issues such as missing information
+    if(!validateTest.validUser) {
+      this.snackBar.open(validateTest.reason, 'dismiss', {duration:3000});
+      return false;
+    };
+
+    //check if the user name exists
+    this.validateService.existingUserCheck(user).subscribe(data => {
+      if(data.existingUser) {
+        this.snackBar.open('Username is Taken', 'ok', {duration:3000})
+        return false;
+      }
+    });
     // Register user
     this.authService.registerUser(user).subscribe(data => {
       if(data.success){

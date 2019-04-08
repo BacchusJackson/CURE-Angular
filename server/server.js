@@ -25,6 +25,9 @@ const app = express();
 //pulls in the route catchers from users
 const users = require('./routes/users');
 
+//pulls in the route catchers for data
+const data = require('./routes/data')
+
 //sets the port to an enviromental variable or 3000
 const port = process.env.PORT || 3000;
 
@@ -43,13 +46,12 @@ app.use(passport.session());
 
 require('../config/passport')(passport);
 
+//list of routes to use
 app.use('/users', users);
+app.use('/data', data);
 
 //points to the folder where angular compiles the html code
 app.use(express.static(path.join(__dirname, '../public')));
-
-//sets the api route
-//app.use('/api', api);
 
 //get any request and return a response
 app.get('*', (req, res) => {
