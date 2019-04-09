@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ConfigService } from "../config/config.service";
-//import { map } from "rxjs/operators";
+import { map } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { Activity } from "../data/activity";
 
 
 @Injectable({
@@ -10,27 +12,14 @@ import { ConfigService } from "../config/config.service";
 
 export class DataService {
 
-  constructor(private http:HttpClient, private api:ConfigService) { }
-  
+  constructor(
+    private http:HttpClient, 
+    private api:ConfigService
+     ) { }
+
   //call to get all activities
-  getActivities() {
-    this.api.getApis();
+  getActivities(): Observable<Activity[]> {
 
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    }
-    //headers = new HttpHeaders
-    //headers.append('Content-Type', 'application/json');
-
-    //return this.http.get('http://localhost:3000/data/allActivities', {headers:headers})
-    //.pipe(map(res => res.json()))
-    //  }
-    
-
-    return this.http.get(this.api.allActivitiesUrl, httpOptions);
-  
+    return this.http.get<Activity[]>('http://localhost:3000/data/allActivities')
   }
 }
-
