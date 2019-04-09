@@ -6,6 +6,7 @@ import { HttpModule } from "@angular/http";
 import { platformBrowserDynamic } from "@angular/platform-browser-dynamic";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { HttpClientModule } from "@angular/common/http";
 
 //Material Design Stuff
 import {MatTabsModule} from '@angular/material/tabs';
@@ -32,6 +33,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { DataService } from "./services/data.service";
 import { ValidateService } from "./services/validate.service";
 import { AuthGuard } from './guards/auth.guard';
+import { UnitEngagementComponent } from './components/new-entry/unit-engagement/unit-engagement.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,8 @@ import { AuthGuard } from './guards/auth.guard';
     RegisterComponent,
     LogComponent,
     HelpComponent,
-    ProfileComponent
+    ProfileComponent,
+    UnitEngagementComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +64,8 @@ import { AuthGuard } from './guards/auth.guard';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    HttpClientModule
   ],
   providers: [ValidateService, AuthGuard, DataService],
   bootstrap: [AppComponent]

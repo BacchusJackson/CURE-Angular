@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from "../../services/data.service";
 import { MatSnackBar } from "@angular/material";
+
 @Component({
   selector: 'app-new-entry',
   templateUrl: './new-entry.component.html',
@@ -50,14 +51,14 @@ export class NewEntryComponent implements OnInit {
 
   getActivities() {
     this.dataService.getActivities().subscribe(res => {
-      //this.recData = data;
-      this.recData = res.activities;
+
+      this.recData = res['activities']
       
     }, 
-    //if there is an error
+    //if there is an error for some weird reason
     err => { throw err}, 
     //once the data is retrieved
-    () => { this.fillOptions() }
+    () => { }
     )
 
   }
@@ -73,12 +74,12 @@ export class NewEntryComponent implements OnInit {
       const activity = activities[i];
       
       //if the category matches the active form, push it to the activities list
-      if(activity.category == activeForm) {
+      if(activity.category == activeForm && activity.name != this.activitySelect) {
         tempList.push(activity.name)
       }
       
     }
-
+    //the options in the dropdown menus
     this.activities = tempList;
   };
 
@@ -86,25 +87,29 @@ export class NewEntryComponent implements OnInit {
     const activities = this.recData;
     const totalActivities = Object.keys(activities);
 
+    //loop through each activity 
     for (let i = 0; i < totalActivities.length; i++) {
       const activity = activities[i];
       
-      if(activity.category == activeForm) {
-        if(activity.name = this.activitySelect) {
+      //if the category matches the form and the name is the same, set new properties
+      if(activity.category == activeForm && activity.name == this.activitySelect) {
           this.properties = activity.properties;
+          console.log(this.properties);
           break;
-        }
       }
     }
 
+    //load the correct properties on the form
     this.loadProperties();
   };
 
   loadProperties() {
+    //make all of the fields invisible to start
     this.vHours = false;
     this.vMembers = false;
     this.vDescription = false;
 
+    //go through the properties and make the correct ones visible
     this.properties.map(prop => {
       if(prop == 'hours'){
         this.vHours = true
@@ -115,13 +120,9 @@ export class NewEntryComponent implements OnInit {
       if(prop == 'description'){
         this.vDescription = true
       };
-      
+
     })
     
-  };
-
-  fillOptions() {
-
   };
 
   onClear() {
