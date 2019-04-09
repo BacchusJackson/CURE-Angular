@@ -12,7 +12,10 @@ router.post('/register', (req, res, next) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         username: req.body.username,
-        password: req.body.password
+        password: req.body.password,
+        site: 'default',
+        clinic: 'default',
+        status: 'temp'
         
     });
 
@@ -51,7 +54,10 @@ router.post('/authenticate', (req, res, next) => {
                         id: user._id,
                         firstName: user.firstName,
                         lastName: user.lastName,
-                        username: user.username
+                        username: user.username,
+                        site: user.site,
+                        clinic: user.clinic,
+                        userPermission: user.status
                     }
                 });
             }else {

@@ -1,6 +1,6 @@
 export interface Activity {
-    name: string;
-    category: string;
+    name: String;
+    category: String;
     properties: [];
 
 }

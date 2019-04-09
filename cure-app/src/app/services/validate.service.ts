@@ -34,4 +34,7 @@ export class ValidateService {
     .pipe(map(res => res.json()))
   };
 
+  // validateEntry(newEntry) {
+  //   if()
+  // }
 }

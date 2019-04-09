@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const config = require('../../config/database')
 
 const Activity = require('../../models/activity');
+const Entry = require('../../models/entry');
 
 router.get('/allActivities', (req, res, next) => {
 
@@ -26,6 +27,39 @@ router.post('/addActivity', (req, res, next) => {
             res.json({success:false, msg:'Failed to add Activity'});
         }else{
             res.json({success:true, msg:'Activity Sucessfully added'})
+        }
+    })
+});
+
+router.get('/allEntries', (req, res, next) => {
+    Entry.getAll((err, data) => {
+        if(err) throw err;
+        
+        res.json({entries: data})
+    })
+});
+
+router.post('/addEntry', (req,res,next)=> {
+    //create an object from the request
+    const newEntry = new Entry({
+        activityID: req.body.activityID,
+        activity: req.body.activity,
+        category: req.body.category,
+        creator: req.body.creator,
+        dateEntered: req.body.dateEntered,
+        dateCreated: req.body.dateCreated,
+        site: req.body.site,
+        clinic: req.body.clinic,
+        userStatus: req.body.userStatus
+    });
+
+    //attempt to add the entry to the database
+    Entry.addEntry(newEntry, (err) => {
+        if(err) {
+            res.json({success:false, msg:'Server: Failed to add Entry'});
+            console.log(err);
+        }else {
+            res.json({success:true, msg: 'Server: Entry successfully Added'})
         }
     })
 });

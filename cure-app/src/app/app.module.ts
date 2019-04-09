@@ -34,6 +34,10 @@ import { DataService } from "./services/data.service";
 import { ValidateService } from "./services/validate.service";
 import { AuthGuard } from './guards/auth.guard';
 import { UnitEngagementComponent } from './components/new-entry/unit-engagement/unit-engagement.component';
+import { LeaderConsultationComponent } from './components/new-entry/leader-consultation/leader-consultation.component';
+import { TrainingComponent } from './components/new-entry/training/training.component';
+import { TreatmentComponent } from './components/new-entry/treatment/treatment.component';
+import { IndividualCoachingComponent } from './components/new-entry/individual-coaching/individual-coaching.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,11 @@ import { UnitEngagementComponent } from './components/new-entry/unit-engagement/
     LogComponent,
     HelpComponent,
     ProfileComponent,
-    UnitEngagementComponent
+    UnitEngagementComponent,
+    LeaderConsultationComponent,
+    TrainingComponent,
+    TreatmentComponent,
+    IndividualCoachingComponent
   ],
   imports: [
     BrowserModule,

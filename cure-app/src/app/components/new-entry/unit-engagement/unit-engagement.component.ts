@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from "../../../services/data.service";
 import { Activity } from "../../../data/activity";
+import { MatSnackBar } from "@angular/material";
+import { AuthService } from "../../../services/auth.service";
 
 @Component({
   selector: 'app-unit-engagement',
@@ -18,11 +20,17 @@ export class UnitEngagementComponent implements OnInit {
   vMembers: boolean;
   vDescription: boolean;
   selectedActivity: Activity;
+  user: Object;
 
-  constructor(private dataService: DataService) { }
+  constructor(
+    private dataService: DataService, 
+    private snackBar:MatSnackBar,
+    private authService: AuthService ) { }
 
   ngOnInit() {
     this.getActivities();
+    this.setUserProfile();
+
   }
 
   getActivities(): void {
@@ -30,10 +38,12 @@ export class UnitEngagementComponent implements OnInit {
 .subscribe(data => this.activities = data['activities'].filter(e => e.category == 'Unit Engagement'));
   }
 
-  activityClick() {
-    console.log(this.activities);
+  setUserProfile():void {
+    this.authService.getProfile()
+    .subscribe(data => this.user = data['user']);
   }
-  activityOptionClick() {
+  
+  activityOptionClick():void {
     this.vHours = false;
     this.vMembers = false;
     this.vDescription = false;
@@ -44,5 +54,34 @@ export class UnitEngagementComponent implements OnInit {
       if(prop =='description'){ this.vDescription = true};
     });
 
+  }
+  onSubmit():void {
+    /*
+    Dev comments
+    1. add the hours, members, and description to the entry model
+    2. add a date input
+    3. data validation for entry
+    4. data service submission
+    */
+    const newEntry = {
+      activityID: this.selectedActivity['_id'],
+      activity: this.selectedActivity.name,
+      category: this.selectedActivity.category,
+      creator: this.user['username'],
+      dateEntered: '',
+      dateCreated: Date.now(),
+      site: this.user['clinic'],
+      clinic: this.user['site'],
+      userStatus: this.user['status']
+    }
+    console.log(newEntry);
+    //this.snackBar.open('A new entry has been added!','',{duration:3000})
+    //this.onClear();
+
+  }
+  onClear():void {
+    this.hours = null;
+    this.members=null;
+    this.description = '';
   }
   }

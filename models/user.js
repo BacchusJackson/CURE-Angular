@@ -19,6 +19,15 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    site: {
+        type: String
+    },
+    clinic: {
+        type: String
+    },
+    status: {
+        type: String
     }
 });
 
