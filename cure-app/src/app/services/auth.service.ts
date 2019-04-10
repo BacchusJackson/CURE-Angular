@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers} from '@angular/http';
 import { map } from "rxjs/operators";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AuthService {
   authToken: any;
   user: any;
 
-  constructor(private http:Http) { }
+  constructor(private http:Http, private http2:HttpClient) { }
 
   registerUser(user) {
     let headers = new Headers();
@@ -37,6 +38,11 @@ export class AuthService {
         .pipe(map(res => res.json()))
       
   }
+  //used for changing site, clinic, and user status
+  updateProfile(updateInfo) {
+
+    return this.http2.post('http://localhost:3000/users/updateProfile', updateInfo)
+  }
 
   loadToken() {
     const token = localStorage.getItem('id_token');
@@ -48,6 +54,8 @@ export class AuthService {
     this.authToken = token;
     this.user = user;
   }
+
+
   // Checks for a token and if it's expired returns true or false
   loggedIn(){
     const helper = new JwtHelperService();

@@ -61,16 +61,6 @@ export class UnitEngagementComponent implements OnInit {
 
   }
   onSubmit() {
-    /*
-    Dev comments
-    1. add the hours, members, and description to the entry model
-    2. add a date input
-    3. data validation for entry
-    4. data service submission
-    */
-
-    //this.newEntry.activityID = this.selectedActivity['_id'];
-
 
     this.newEntry = {
       activityID: this.selectedActivity['_id'],

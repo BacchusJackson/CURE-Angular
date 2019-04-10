@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { DataService } from "../../services/data.service";
+import { MatSnackBar } from "@angular/material";
 
 @Component({
   selector: 'app-profile',
@@ -20,20 +21,24 @@ export class ProfileComponent implements OnInit {
   constructor(
     private authService: AuthService, 
     private router:Router,
-    private dataService:DataService) { }
+    private dataService:DataService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getUserProfile();
     this.getSites();
+
   }
   
   getUserProfile():void {
     this.authService.getProfile().subscribe(profile => {
-    this.user = profile.user;
-  });
-
-  
-}
+      this.user = profile.user;
+      this.selectedSite = this.user['site'];
+      this.selectedClinic = this.user['clinic'];
+    });
+    
+    
+  }
   getSites():void {
     this.dataService.getSites().subscribe(data => {
       this.sitesData = data['sites'];
@@ -42,9 +47,27 @@ export class ProfileComponent implements OnInit {
   }
   getClinics():void {
     const filteredSite =this.sitesData
-      .filter(site => site['name'] ==this.selectedSite['name']);
+    .filter(site => site['name'] ==this.selectedSite);
+    
+    this.clinics = filteredSite[0]['clinics']
 
-    console.log(filteredSite);
+  }
 
+  onSubmit():void {
+    const updateInfo = {
+      userID: this.user['_id'],
+      site: this.selectedSite,
+      clinic: this.selectedClinic,
+      status: this.user['status']
+    }
+
+    this.authService.updateProfile(updateInfo).subscribe(response => {
+      if(response['success']) {
+        this.snackBar.open('Profile Updated', '', {duration: 3000})
+      }else {
+        this.snackBar.open(response['msg'], '', {duration: 3000})
+        console.log(response);
+      }
+    })
   }
 }

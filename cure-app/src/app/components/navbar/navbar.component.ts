@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
-import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-navbar',

@@ -28,6 +28,22 @@ router.post('/register', (req, res, next) => {
     })
 });
 
+router.post('/updateProfile', (req, res, next) => {
+    const updateInfo = {
+        userID: req.body.userID,
+        site: req.body.site,
+        clinic: req.body.clinic,
+        status: req.body.status
+    };
+
+    User.updateProfile(updateInfo, (err) => {
+        if(err) {
+            res.json({success: false, msg:'server: Failed to update profile'})
+        }else{
+            res.json({success: true, msg:'server: User Profile Updated'})
+        }
+    })
+})
 //Authenticate 
 router.post('/authenticate', (req, res, next) => {
     const username = req.body.username;

@@ -56,7 +56,6 @@ module.exports.addUser = function(newUser, callback){
             newUser.save(callback)
         })
     });
-
 }
 
 module.exports.comparePassword = function(candidatePassword, hash, callback){
@@ -64,4 +63,14 @@ module.exports.comparePassword = function(candidatePassword, hash, callback){
         if(err) throw err;
         callback(null, isMatch);
     })
+}
+
+module.exports.updateProfile = function(updateInfo, callback) {
+    User.findByIdAndUpdate(updateInfo.userID, 
+        {$set: {
+            site: updateInfo.site, 
+            clinic: updateInfo.clinic, 
+            status: updateInfo.status
+        }}, 
+        callback)
 }
