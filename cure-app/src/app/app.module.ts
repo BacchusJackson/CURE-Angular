@@ -19,6 +19,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from "@angular/material";
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -56,26 +58,13 @@ import { IndividualCoachingComponent } from './components/new-entry/individual-c
     IndividualCoachingComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    AppRoutingModule,
-    MatTabsModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    FlexLayoutModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    MatSnackBarModule,
-    HttpClientModule
+    BrowserModule, FormsModule,HttpModule, AppRoutingModule, HttpClientModule,
+    BrowserAnimationsModule, ReactiveFormsModule, FlexLayoutModule,
+    MatTabsModule, MatToolbarModule, MatMenuModule, MatIconModule,
+    MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule,
+    MatSelectModule, MatSnackBarModule, MatDatepickerModule, MatNativeDateModule
   ],
-  providers: [ValidateService, AuthGuard, DataService],
+  providers: [ValidateService, AuthGuard, DataService, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

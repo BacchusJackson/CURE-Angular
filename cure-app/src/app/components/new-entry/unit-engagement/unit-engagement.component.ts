@@ -3,6 +3,8 @@ import { DataService } from "../../../services/data.service";
 import { Activity } from "../../../data/activity";
 import { MatSnackBar } from "@angular/material";
 import { AuthService } from "../../../services/auth.service";
+import { ValidateService } from "../../../services/validate.service";
+import { Entry } from "../../../data/entry";
 
 @Component({
   selector: 'app-unit-engagement',
@@ -16,16 +18,19 @@ export class UnitEngagementComponent implements OnInit {
   hours:number;
   members:number;
   description:string;
+  dateEntered: Date;
   vHours:boolean;
   vMembers: boolean;
   vDescription: boolean;
   selectedActivity: Activity;
   user: Object;
+  newEntry: Entry;
 
   constructor(
     private dataService: DataService, 
     private snackBar:MatSnackBar,
-    private authService: AuthService ) { }
+    private authService: AuthService,
+    private validateService: ValidateService ) { }
 
   ngOnInit() {
     this.getActivities();
@@ -55,7 +60,7 @@ export class UnitEngagementComponent implements OnInit {
     });
 
   }
-  onSubmit():void {
+  onSubmit() {
     /*
     Dev comments
     1. add the hours, members, and description to the entry model
@@ -63,21 +68,46 @@ export class UnitEngagementComponent implements OnInit {
     3. data validation for entry
     4. data service submission
     */
-    const newEntry = {
+
+    //this.newEntry.activityID = this.selectedActivity['_id'];
+
+
+    this.newEntry = {
       activityID: this.selectedActivity['_id'],
       activity: this.selectedActivity.name,
       category: this.selectedActivity.category,
       creator: this.user['username'],
-      dateEntered: '',
-      dateCreated: Date.now(),
+      dateEntered: this.dateEntered,
+      dateCreated: new Date(),
       site: this.user['clinic'],
       clinic: this.user['site'],
-      userStatus: this.user['status']
-    }
-    console.log(newEntry);
-    //this.snackBar.open('A new entry has been added!','',{duration:3000})
-    //this.onClear();
+      userStatus: this.user['status'],
+      hours: null,
+      members: null,
+      description: null
+    };
 
+    //check to see if the fields are visible before assignment
+    if(this.vHours) {this.newEntry.hours = this.hours};
+    if(this.vMembers) {this.newEntry.members = this.members};
+    if(this.vDescription) {this.newEntry.description = this.description};
+    
+    //do a validation test on the new Entry object
+    let test = this.validateService.validateEntry(this.newEntry);
+    
+    //data validation test for background errors (ex. user profile information)
+    if(!test.validEntry) {
+      this.snackBar.open(test.reason,'dismiss',{duration:3000})
+      return false;
+    }
+
+    this.dataService.addEntry(this.newEntry).subscribe(response => {
+      if(response['success']) {
+        this.snackBar.open(response['msg'], 'dismiss', {duration: 3000})
+      } else {
+        this.snackBar.open(response['msg'], 'dismiss', {duration: 3000})
+      }
+    })
   }
   onClear():void {
     this.hours = null;

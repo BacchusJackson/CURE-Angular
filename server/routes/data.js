@@ -6,6 +6,7 @@ const config = require('../../config/database')
 
 const Activity = require('../../models/activity');
 const Entry = require('../../models/entry');
+const Sites = require('../../models/site');
 
 router.get('/allActivities', (req, res, next) => {
 
@@ -50,9 +51,12 @@ router.post('/addEntry', (req,res,next)=> {
         dateCreated: req.body.dateCreated,
         site: req.body.site,
         clinic: req.body.clinic,
-        userStatus: req.body.userStatus
+        userStatus: req.body.userStatus,
+        hours: req.body.hours,
+        members: req.body.members,
+        description: req.body.description
     });
-
+    
     //attempt to add the entry to the database
     Entry.addEntry(newEntry, (err) => {
         if(err) {
@@ -61,6 +65,14 @@ router.post('/addEntry', (req,res,next)=> {
         }else {
             res.json({success:true, msg: 'Server: Entry successfully Added'})
         }
+    })
+});
+
+router.get('/sites', (req, res, next) => {
+    Sites.getAll((err, data) => {
+        if(err) throw err;
+        
+        res.json({sites: data})
     })
 });
 

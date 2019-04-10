@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from "./auth.service";
 import { Http, Headers} from '@angular/http';
 import { map } from "rxjs/operators";
+import { NewEntryComponent } from '../components/new-entry/new-entry.component';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,13 @@ export class ValidateService {
     .pipe(map(res => res.json()))
   };
 
-  // validateEntry(newEntry) {
-  //   if()
-  // }
-}
+  validateEntry(newEntry) {
+    if(!newEntry.activityID || !newEntry.activity) { return {validEntry: false, reason:"No activity selected"}};
+    if(newEntry.creator=='default') {return {validEntry: false, reason: 'User not Logged in'}};
+    if(!newEntry.dateEntered) {return {validEntry: false, reason: 'No date entered'}};
+    if(newEntry.site == 'default' || newEntry.clinic == 'default') {return {validEntry: false, reason: 'User profile not configured'}};
+
+    //pass all validation checks
+    return {validEntry: true}
+    }
+  }

@@ -1,6 +1,26 @@
-<div *ngIf="user">
-  <h2 class="page-header">{{user.firstName}}</h2>
-  <ul class="list-group">
-    <li class="list-group-item">{{user.username}}</li>
-  </ul>
-</div>
+<mat-card>
+    <mat-card-content>
+        <div>
+            <h1>User Profile</h1>
+            <h3 *ngIf="user">User Status: <em>{{user.status}}</em></h3>
+        </div>
+            <form>
+              <mat-form-field>
+                <mat-select [(ngModel)]="selectedSite" name="selectedSite" placeholder="Site">
+                  <mat-option *ngFor="let site of sites" [value]="site">{{site}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select (click)="getClinics()" [(ngModel)]="selectedClinic" name="selectedClinic" placeholder="Clinic">
+                  <mat-option *ngFor="let clinic of clinics" [value]="clinic">{{clinic}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </form>
+        
+    </mat-card-content>
+    <mat-card-actions>
+
+        <button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+        <button mat-button>Cancel</button>
+    </mat-card-actions>
+</mat-card>

@@ -7,5 +7,8 @@ export interface Entry {
     dateCreated: Date;
     site: String;
     clinic: String;
-    tempUser: Boolean;
+    userStatus: Boolean;
+    hours: number;
+    members: number;
+    description: String;
 }

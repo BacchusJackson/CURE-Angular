@@ -37,8 +37,17 @@ const EntrySchema = mongoose.Schema({
         required: true
     },
     userStatus: {
-        type: Boolean,
+        type: String,
         required: true
+    },
+    hours: {
+        type: Number
+    },
+    members: {
+        type: Number
+    },
+    description: {
+        type: String
     }
 });
 

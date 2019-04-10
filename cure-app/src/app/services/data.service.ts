@@ -30,6 +30,11 @@ export class DataService {
     })
   };
 
-    return this.http.post<Entry>('http://localhost:3000/data/addEntry', newEntry, httpOptions)
+    return this.http.post('http://localhost:3000/data/addEntry', newEntry, httpOptions)
+  }
+
+  getSites(): Observable<Object[]>{
+
+    return this.http.get<Object[]>('http://localhost:3000/data/sites')
   }
 }

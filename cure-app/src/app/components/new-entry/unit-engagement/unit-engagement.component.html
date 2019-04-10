@@ -8,6 +8,11 @@
                         <mat-option (click)="activityOptionClick()" *ngFor="let activity of activities" [value]="activity">{{activity.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
+                <mat-form-field>
+                        <input matInput [matDatepicker]="picker" placeholder="date of activity"  [(ngModel)]="dateEntered" name="dateEntered">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
                 <mat-form-field *ngIf="vHours">
                         <input matInput placeholder="Hours"  [(ngModel)]="hours" name="hours">
                 </mat-form-field>
