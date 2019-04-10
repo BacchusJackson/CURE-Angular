@@ -1,34 +1,26 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <a class="navbar-brand" href="#">C</a>
-    <a class="navbar-brand" href="#">CURE</a>
-    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" 
-    data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" 
-    aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<mat-toolbar color="primary" class="CURE-toolbar">
+  <!-- Aligned left -->
+  <span>CURE</span>
+  <button *ngIf="user" [routerLink]="['/new']" routerLinkActive="active" mat-button>New Entry</button>
+
+  <span class="CURE-toolbar-divider"></span>
+  <!-- Alligned right -->
   
-    <div class="navbar-collapse collapse" id="navbarColor01">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/new']" routerLinkActive="active"
-          [routerLinkActiveOptions] = "{exact:true}">New Entry </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/log']" routerLinkActive="active"
-          [routerLinkActiveOptions] = "{exact:true}">Log</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/help']" routerLinkActive="active"  [routerLinkActiveOptions]="{exact:true}">Help</a>
-        </li>
-      </ul>
-      <ul class ="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active"
-          [routerLinkActiveOptions] = "{exact:true}">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/register']" routerLinkActive="active" [routerLinkActiveOptions] = "{exact:true}">Register</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
+  <span *ngIf="user" style="margin-right: 2%">{{user.username}}</span>
+  
+  <button mat-icon-button [matMenuTriggerFor]="appMenu" (click)='loadUserProfile()'>
+    <mat-icon>account_box</mat-icon>
+    <mat-icon>expand_more</mat-icon>
+
+    <mat-menu #appMenu="matMenu" yPosition="below">
+      <button *ngIf="!user" mat-menu-item [routerLink]="['/login']" routerLinkActive="active" >Login</button>
+
+      <button *ngIf="!user" mat-menu-item [routerLink]="['/register']" routerLinkActive="active" >Register</button>
+
+      <button *ngIf="user" mat-menu-item [routerLink]="['/profile']" routerLinkActive="active" >My Profile</button>
+
+      <button *ngIf="user" (click)='onLogoutClick()' mat-menu-item >Logout</button>
+    </mat-menu>
+  </button>
+
+</mat-toolbar>

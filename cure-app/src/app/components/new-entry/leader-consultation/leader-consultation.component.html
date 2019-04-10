@@ -1,0 +1,31 @@
+<mat-card style="margin-top:2%; margin-bottom: 10%">
+    <h3>New Activity</h3>
+    <mat-card-content>
+            <form>
+                <mat-form-field>
+                    <mat-select [(ngModel)]="selectedActivity" name="selectedActivity">
+                        <mat-option>--</mat-option>
+                        <mat-option (click)="activityOptionClick()" *ngFor="let activity of activities" [value]="activity">{{activity.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field *ngIf="vHours">
+                        <input matInput placeholder="Hours"  [(ngModel)]="hours" name="hours">
+                </mat-form-field>
+                <br>
+                <mat-form-field *ngIf="vMembers">
+                    <input matInput placeholder="Members"  [(ngModel)]="members" name="members">
+                </mat-form-field>
+                <br>
+                <mat-form-field *ngIf="vDescription">
+                    <textarea matInput placeholder="Description"  [(ngModel)]="description" name="description"></textarea>
+                </mat-form-field>
+                <br>
+            </form>
+    </mat-card-content>
+    <mat-card-actions>
+
+        <button mat-raised-button color="primary" style="width: 90%" (click)="onSubmit()">Add</button>
+        <br>
+        <button mat-button style="width: 90%" (click)="onClear()">clear</button>
+    </mat-card-actions>
+</mat-card>
