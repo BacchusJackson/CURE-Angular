@@ -6,6 +6,10 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('../config/database');
 
+//https stuff
+const fs = require('fs')
+const https = require('https')
+
 // Connect to database in config file
 mongoose.connect(config.database);
 
@@ -29,7 +33,7 @@ const users = require('./routes/users');
 const data = require('./routes/data')
 
 //sets the port to an enviromental variable or 3000
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3004;
 
 //set the port option
 app.set('port', port);
@@ -54,9 +58,15 @@ app.use('/data', data);
 app.use(express.static(path.join(__dirname, '../public')));
 
 //get any request and return a response
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'))
 });
 
 //starts the server
-app.listen(port, () => console.log('Server listening on port: ' + port));
+//app.listen(port, () => console.log('Server listening on port: ' + port));
+
+https.createServer({
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.cert')
+}, app)
+.listen(port, () => console.log('Server listening on port: ' + port));
