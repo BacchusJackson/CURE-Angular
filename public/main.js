@@ -1390,7 +1390,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.registerUser = function (user) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/users/register', user, { headers: headers })
+        return this.http.post('users/register', user, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
             return res.json();
         }));
@@ -1398,7 +1398,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.authenticateUser = function (user) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/users/authenticate', user, { headers: headers })
+        return this.http.post('users/authenticate', user, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }));
     };
     AuthService.prototype.getProfile = function () {
@@ -1406,12 +1406,12 @@ var AuthService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.get('http://localhost:3000/users/profile', { headers: headers })
+        return this.http.get('users/profile', { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }));
     };
     //used for changing site, clinic, and user status
     AuthService.prototype.updateProfile = function (updateInfo) {
-        return this.http2.post('http://localhost:3000/users/updateProfile', updateInfo);
+        return this.http2.post('users/updateProfile', updateInfo);
     };
     AuthService.prototype.loadToken = function () {
         var token = localStorage.getItem('id_token');
@@ -1475,10 +1475,10 @@ var DataService = /** @class */ (function () {
     }
     //call to get all activities 
     DataService.prototype.getActivities = function () {
-        return this.http.get('http://localhost:3000/data/allActivities');
+        return this.http.get('data/allActivities');
     };
     DataService.prototype.getEntries = function (site) {
-        return this.http.get('http://localhost:3000/data/allEntries');
+        return this.http.get('data/allEntries');
     };
     DataService.prototype.addEntry = function (newEntry) {
         var httpOptions = {
@@ -1486,10 +1486,10 @@ var DataService = /** @class */ (function () {
                 'Content-Type': 'application/json'
             })
         };
-        return this.http.post('http://localhost:3000/data/addEntry', newEntry, httpOptions);
+        return this.http.post('data/addEntry', newEntry, httpOptions);
     };
     DataService.prototype.getSites = function () {
-        return this.http.get('http://localhost:3000/data/sites');
+        return this.http.get('data/sites');
     };
     DataService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -1547,7 +1547,7 @@ var ValidateService = /** @class */ (function () {
     ValidateService.prototype.existingUserCheck = function (user) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_3__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/users/existingUserCheck', user, { headers: headers })
+        return this.http.post('users/existingUserCheck', user, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (res) { return res.json(); }));
     };
     ;

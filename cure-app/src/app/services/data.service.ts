@@ -15,12 +15,12 @@ export class DataService {
   //call to get all activities 
   getActivities(): Observable<Activity[]> {
 
-    return this.http.get<Activity[]>('http://localhost:3000/data/allActivities')
+    return this.http.get<Activity[]>('data/allActivities')
   }
 
   getEntries(site?:String): Observable<Entry[]> {
 
-    return this.http.get<Entry[]>('http://localhost:3000/data/allEntries')
+    return this.http.get<Entry[]>('data/allEntries')
   }
 
   addEntry(newEntry:Entry) {
@@ -30,11 +30,11 @@ export class DataService {
     })
   };
 
-    return this.http.post('http://localhost:3000/data/addEntry', newEntry, httpOptions)
+    return this.http.post('data/addEntry', newEntry, httpOptions)
   }
 
   getSites(): Observable<Object[]>{
 
-    return this.http.get<Object[]>('http://localhost:3000/data/sites')
+    return this.http.get<Object[]>('data/sites')
   }
 }
