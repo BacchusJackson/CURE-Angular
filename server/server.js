@@ -28,7 +28,6 @@ mongoose.connection.on('error', (err) => {
 
 const app = express();
 
-
 //pulls in the route catchers from users
 const users = require('./routes/users');
 

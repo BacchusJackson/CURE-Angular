@@ -1,12 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
-const jwt = require('jsonwebtoken');
-const config = require('../../config/database')
 
 const Activity = require('../../models/activity');
 const Entry = require('../../models/entry');
 const Sites = require('../../models/site');
+
+//This module handles all http requests for data
+
+/*
+All Activities Get Request
+Use Case: This returns all the activities from the database
+*/
 
 router.get('/allActivities', (req, res, next) => {
 
@@ -16,6 +20,12 @@ router.get('/allActivities', (req, res, next) => {
         res.json({activities: data});
     })
 });
+
+/*
+Add Activity Post Request
+Use Case: This adds an Activity to the database
+The request body will have all of the information for the update
+*/
 
 router.post('/addActivity', (req, res, next) => {
     const newActivity = new Activity({
@@ -32,6 +42,11 @@ router.post('/addActivity', (req, res, next) => {
     })
 });
 
+/*
+All Entries
+Use Case: This returns all the entries from the database
+*/
+
 router.get('/allEntries', (req, res, next) => {
     Entry.getAll((err, data) => {
         if(err) throw err;
@@ -39,6 +54,12 @@ router.get('/allEntries', (req, res, next) => {
         res.json({entries: data})
     })
 });
+
+/*
+add Entry
+Use Case: This adds an entry to the database
+The request should have all of the information to create a new entry
+*/
 
 router.post('/addEntry', (req,res,next)=> {
     //create an object from the request
@@ -68,6 +89,10 @@ router.post('/addEntry', (req,res,next)=> {
     })
 });
 
+/*
+Site Get Request
+Use Case: This returns all the sites from the database
+*/
 router.get('/sites', (req, res, next) => {
     Sites.getAll((err, data) => {
         if(err) throw err;
