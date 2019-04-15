@@ -7,15 +7,18 @@ const mongoose = require('mongoose');
 const config = require('../config/database');
 
 //https stuff
-const fs = require('fs')
-const https = require('https')
+//const fs = require('fs')
+//const https = require('https')
 
 // Connect to database in config file
-mongoose.connect(config.database);
+//mongoose.connect(config.localDatabase);
+
+//For remote database
+mongoose.connect(config.cloudDatabase);
 
 //success connection message
 mongoose.connection.on('connected', () => {
-    console.log('connected to database ' + config.database);
+    console.log('Successfully connected to database');
 });
 
 //on error
@@ -33,7 +36,7 @@ const users = require('./routes/users');
 const data = require('./routes/data')
 
 //sets the port to an enviromental variable or 3000
-const port = process.env.PORT || 3004;
+const port = process.env.PORT || 3000;
 
 //set the port option
 app.set('port', port);
@@ -63,10 +66,10 @@ app.get('/', (req, res) => {
 });
 
 //starts the server
-//app.listen(port, () => console.log('Server listening on port: ' + port));
+app.listen(port, () => console.log('Server listening on port: ' + port));
 
-https.createServer({
-    key: fs.readFileSync('server.key'),
-    cert: fs.readFileSync('server.cert')
-}, app)
-.listen(port, () => console.log('Server listening on port: ' + port));
+// https.createServer({
+//     key: fs.readFileSync('server.key'),
+//     cert: fs.readFileSync('server.cert')
+// }, app)
+// .listen(port, () => console.log('Server listening on port: ' + port));
