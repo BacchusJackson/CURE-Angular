@@ -1,7 +1,10 @@
 # CURE
-Created By: JaX
-Last Update: 15 April 2019
-Version: 0.05 (BETA UNRELEASED)
+
+**Created By:** JaX
+
+**Last Update:** 15 April 2019
+
+**Version:** 0.05 (BETA UNRELEASED)
 
 This application uses the following technologies
 
