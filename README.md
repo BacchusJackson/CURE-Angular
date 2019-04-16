@@ -1,15 +1,15 @@
 # CURE
 Created By: JaX
-Last Update: 2 April 2019
-Version: 0.04 (BETA UNRELEASED)
+Last Update: 15 April 2019
+Version: 0.05 (BETA UNRELEASED)
 
 This application uses the following technologies
 
-Frontend: Angular2
+**Frontend:** Angular2
 
-Backend: NodeJs w/ Express
+**Backend:** NodeJs w/ Express
 
-Database: local MongoDB Server
+**Database:** local MongoDB Server
 
 
 ## File Structure
