@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService:AuthService,
     private router:Router,
-    private snackBar:MatSnackBar) { }
+    private snackBar:MatSnackBar
+    ) { }
 
   ngOnInit() {
   }
@@ -25,7 +26,7 @@ export class LoginComponent implements OnInit {
       username: this.username,
       password: this.password
     }
-    
+
     this.authService.authenticateUser(user).subscribe(data => {
       if(data.success) {
         this.authService.storeUserData(data.token, data.user);

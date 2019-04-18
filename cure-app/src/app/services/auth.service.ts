@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers} from '@angular/http';
 import { map } from "rxjs/operators";
+import { BehaviorSubject } from "rxjs";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
+import { ApiURLsService } from "../services/api-urls.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +13,20 @@ export class AuthService {
   authToken: any;
   user: any;
 
-  constructor(private http:Http, private http2:HttpClient) { }
+  constructor(
+    private http:Http, 
+    private http2:HttpClient,
+    private api:ApiURLsService ) { }
+  
+  private userLoggedIn = new BehaviorSubject<boolean>(false);
 
+  public get isLoggedIn() {
+    return this.userLoggedIn.asObservable();
+  }
   registerUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('users/register', user, {headers: headers})
+    return this.http.post(this.api.registerUser, user, {headers: headers})
       .pipe(map(res => {
         return res.json();
       }))
@@ -25,7 +35,7 @@ export class AuthService {
   authenticateUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('users/authenticate', user, {headers: headers})
+    return this.http.post(this.api.authenticateUser, user, {headers: headers})
       .pipe(map(res => res.json()))
     }
 
@@ -34,14 +44,14 @@ export class AuthService {
       this.loadToken();
       headers.append('Authorization', this.authToken);
       headers.append('Content-Type', 'application/json');
-      return this.http.get('users/profile', {headers: headers})
+      return this.http.get(this.api.userProfile, {headers: headers})
         .pipe(map(res => res.json()))
       
   }
   //used for changing site, clinic, and user status
   updateProfile(updateInfo) {
 
-    return this.http2.post('users/updateProfile', updateInfo)
+    return this.http2.post(this.api.updateUserProfile, updateInfo)
   }
 
   loadToken() {
