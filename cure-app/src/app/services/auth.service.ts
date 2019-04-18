@@ -3,8 +3,9 @@ import { Http, Headers} from '@angular/http';
 import { map } from "rxjs/operators";
 import { BehaviorSubject } from "rxjs";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ApiURLsService } from "../services/api-urls.service";
+import { User } from "../interfaces/user";
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,15 @@ export class AuthService {
   public get isLoggedIn() {
     return this.userLoggedIn.asObservable();
   }
+
+  login(candidateUser) {
+    const httpOptions = {headers: 
+      new HttpHeaders ({'Content-Type':'application/json'})
+  };
+    //post request to check username and password
+    return this.http2.post(this.api.authenticateUser, candidateUser, httpOptions).toPromise();
+  }
+
   registerUser(user) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

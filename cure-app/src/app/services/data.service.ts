@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Activity } from "../data/activity";
-import { Entry } from "../data/entry";
+import { Activity } from "../interfaces/activity";
+import { Entry } from "../interfaces/entry";
 import { ApiURLsService } from "../services/api-urls.service";
 
 
