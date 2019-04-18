@@ -3,6 +3,7 @@ import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
 import { User } from "../../interfaces/user";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,34 +22,20 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
   onLoginSubmit() {
     const candidateUser = {
       username: this.username, 
       password: this.password
     };
-    interface Response {
-      success: boolean; token?: string; 
-      msg?: String; user?: User
-    };
-
-    this.authService.login(candidateUser)
-    .catch((err) => console.log(err))
-    .then((response: Response) => {
-      console.log(response);
-    })
-
-  
-    // this.authService.authenticateUser(user).subscribe(data => {
-    //   if(data.success) {
-    //     this.authService.storeUserData(data.token, data.user);
-    //     this.snackBar.open('Welcome to CURE', '', {duration:2000})
-    //     this.router.navigate(['/new']);
-    //   }else {
-    //     this.snackBar.open('Incorrect login information', 'dismiss', {duration:3000})
-    //     this.router.navigate(['/login']);
-        
-    //   }
-    // })
+    
+    /* 
+    Attempt authentication through the auth service, once the http request
+    returns a response, if the authentication was successful, confirm the
+    authentication with the auth service and natigate to new entry
+    */
+   
+   this.authService.login(candidateUser)
+   
   }
 }

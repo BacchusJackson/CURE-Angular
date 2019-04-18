@@ -3,6 +3,7 @@ import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { MatSnackBar } from "@angular/material";
 import { Observable } from 'rxjs';
+import { User } from "../../interfaces/user";
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  user$: Observable<object>;
+  user: User;
+  isLoggedIn$: Observable<boolean>;
 
   constructor(
     private authService:AuthService,
@@ -18,9 +20,15 @@ export class NavbarComponent implements OnInit {
     private snackBar:MatSnackBar) { }
 
   ngOnInit() {
-    this.user$ = this.authService.user;
+    this.isLoggedIn$ = this.authService.isLoggedIn;
+    this.getUserProfile();
   }
-  
+  getUserProfile() {
+    this.authService.getProfile().subscribe(data => {
+      this.user = data['user']
+    })
+  };
+
   onLogoutClick() {
     this.authService.logout();
     this.snackBar.open('See you next time!', '', {duration:3000})

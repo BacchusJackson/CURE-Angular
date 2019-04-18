@@ -6,6 +6,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ApiURLsService } from "../services/api-urls.service";
 import { User } from "../interfaces/user";
+import { LoginComponent } from '../components/login/login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ import { User } from "../interfaces/user";
 export class AuthService {
   authToken: any;
   user: any;
+  response: object;
 
   constructor(
     private http:Http, 
@@ -25,12 +27,28 @@ export class AuthService {
     return this.userLoggedIn.asObservable();
   }
 
+  confirmAuthentication(token: string, user: User) {
+    this.storeUserData(token, user);
+    this.userLoggedIn.next(true);
+  }
+
   login(candidateUser) {
+
     const httpOptions = {headers: 
       new HttpHeaders ({'Content-Type':'application/json'})
-  };
+    };
     //post request to check username and password
-    return this.http2.post(this.api.authenticateUser, candidateUser, httpOptions).toPromise();
+    this.http2.post(this.api.authenticateUser, candidateUser, httpOptions).toPromise()
+    .then((response) => {
+      if(response['success']) {
+        console.log('good login attempt');
+        this.userLoggedIn.next(true);
+        this.storeUserData(response['token'], response['user'])
+      } else {
+        console.log('bad login attempt');
+        this.userLoggedIn.next(false);
+      }
+    })
   }
 
   registerUser(user) {
@@ -68,6 +86,7 @@ export class AuthService {
     const token = localStorage.getItem('id_token');
     this.authToken = token;
   }
+
   storeUserData(token, user) {
     localStorage.setItem('id_token', token);
     localStorage.setItem('user', JSON.stringify(user));
