@@ -23,6 +23,7 @@ export class NavbarComponent implements OnInit {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.getUserProfile();
   }
+  
   getUserProfile() {
     this.authService.getProfile().subscribe(data => {
       this.user = data['user']

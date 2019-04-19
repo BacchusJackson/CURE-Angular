@@ -28,14 +28,8 @@ export class LoginComponent implements OnInit {
       username: this.username, 
       password: this.password
     };
-    
-    /* 
-    Attempt authentication through the auth service, once the http request
-    returns a response, if the authentication was successful, confirm the
-    authentication with the auth service and natigate to new entry
-    */
-   
+    //ADD LOGIN MESSAGE AND ROUTE CHANGE
    this.authService.login(candidateUser)
-   
+
   }
 }
