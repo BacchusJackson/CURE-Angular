@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Activity } from "../data/activity";
-import { Entry } from "../data/entry";
+import { Activity } from "../interfaces/activity";
+import { Entry } from "../interfaces/entry";
+import { ApiURLsService } from "../services/api-urls.service";
 
 
 @Injectable({
@@ -11,16 +12,16 @@ import { Entry } from "../data/entry";
 
 export class DataService {
 
-  constructor(private http:HttpClient){ }
+  constructor(private http:HttpClient, private api:ApiURLsService){ }
   //call to get all activities 
   getActivities(): Observable<Activity[]> {
 
-    return this.http.get<Activity[]>('http://localhost:3000/data/allActivities')
+    return this.http.get<Activity[]>(this.api.allActivities)
   }
 
   getEntries(site?:String): Observable<Entry[]> {
 
-    return this.http.get<Entry[]>('http://localhost:3000/data/allEntries')
+    return this.http.get<Entry[]>(this.api.allEntries)
   }
 
   addEntry(newEntry:Entry) {
@@ -30,11 +31,11 @@ export class DataService {
     })
   };
 
-    return this.http.post('http://localhost:3000/data/addEntry', newEntry, httpOptions)
+    return this.http.post(this.api.addEntry, newEntry, httpOptions)
   }
 
   getSites(): Observable<Object[]>{
 
-    return this.http.get<Object[]>('http://localhost:3000/data/sites')
+    return this.http.get<Object[]>(this.api.sites)
   }
 }

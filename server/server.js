@@ -6,12 +6,19 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('../config/database');
 
+//https stuff
+//const fs = require('fs')
+//const https = require('https')
+
 // Connect to database in config file
-mongoose.connect(config.database);
+//mongoose.connect(config.localDatabase);
+
+//For remote database
+mongoose.connect(config.cloudDatabase);
 
 //success connection message
 mongoose.connection.on('connected', () => {
-    console.log('connected to database ' + config.database);
+    console.log('Successfully connected to database');
 });
 
 //on error
@@ -20,7 +27,6 @@ mongoose.connection.on('error', (err) => {
 });
 
 const app = express();
-
 
 //pulls in the route catchers from users
 const users = require('./routes/users');
@@ -54,9 +60,15 @@ app.use('/data', data);
 app.use(express.static(path.join(__dirname, '../public')));
 
 //get any request and return a response
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/index.html'))
 });
 
 //starts the server
 app.listen(port, () => console.log('Server listening on port: ' + port));
+
+// https.createServer({
+//     key: fs.readFileSync('server.key'),
+//     cert: fs.readFileSync('server.cert')
+// }, app)
+// .listen(port, () => console.log('Server listening on port: ' + port));

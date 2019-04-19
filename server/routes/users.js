@@ -6,7 +6,14 @@ const config = require('../../config/database')
 
 const User = require('../../models/user');
 
-//Register
+//This module catches http requests and sends a response
+
+/*
+Register Post request
+Use Case: The user will fillout the necessary information for
+registration and the front end will send a post request.
+The body will contain all of the user information.
+*/
 router.post('/register', (req, res, next) => {
     const newUser = new User({
         firstName: req.body.firstName,
@@ -28,6 +35,12 @@ router.post('/register', (req, res, next) => {
     })
 });
 
+/*
+update profile post request
+Use Case: The frontend will format an update to a specific user's information.
+The request body should have a userID, site, clinic, and status for the update
+
+*/
 router.post('/updateProfile', (req, res, next) => {
     const updateInfo = {
         userID: req.body.userID,
@@ -44,7 +57,13 @@ router.post('/updateProfile', (req, res, next) => {
         }
     })
 })
-//Authenticate 
+/*
+Authentication post request
+Use Case: The front end will call this url to log users in.
+A username and password will be in the request body.
+If the password is correct, a javascript web token will be passed back
+in the response along with the user data minus the password
+*/
 router.post('/authenticate', (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -83,11 +102,20 @@ router.post('/authenticate', (req, res, next) => {
     })
 });
 
-//Profile
+/*
+Profile get requst
+Use Case: To get the user's profile information. If they pass authentication,
+the response will contain the specified user information
+*/
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
     res.json({user: req.user});
 });
 
+/* 
+Check for Existing User
+Use Case: This post request takes a username in a request and returns
+True or False. Typically used for registration to prevent the duplication of users
+*/
 router.post('/existingUserCheck', (req, res, next) => {
     const username = req.body.username;
 

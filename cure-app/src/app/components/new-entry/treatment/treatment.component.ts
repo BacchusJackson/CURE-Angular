@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from "../../../services/data.service";
-import { Activity } from "../../../data/activity";
+import { Activity } from "../../../interfaces/activity";
 import { MatSnackBar } from "@angular/material";
 
 @Component({
