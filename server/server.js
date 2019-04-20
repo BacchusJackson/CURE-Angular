@@ -14,16 +14,11 @@ const config = require('../config/database');
 //mongoose.connect(config.localDatabase);
 
 //For remote database
-mongoose.connect(config.cloudDatabase);
+mongoose.connect(config.localDatabase);
 
 //success connection message
 mongoose.connection.on('connected', () => {
     console.log('Successfully connected to database');
-});
-
-//on error
-mongoose.connection.on('error', (err) => {
-    console.log('Database error '+err)
 });
 
 const app = express();
