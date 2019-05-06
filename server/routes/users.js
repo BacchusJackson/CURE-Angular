@@ -22,15 +22,17 @@ router.post('/register', (req, res, next) => {
         password: req.body.password,
         site: 'default',
         clinic: 'default',
-        status: 'temp'
+        status: 'temp',
+        displayName: req.body.displayName || req.body.firstName + ' ' + req.body.lastName
         
     });
 
+    // Call add User function and a function to handle the response
     User.addUser(newUser, (err, user) => {
         if(err) {
-            res.json({success: false, msg:'failed to register user...'});
+            res.json({success: false, msg:'server: failed to register user...'});
         }else{
-        res.json({success: true, msg:'User successfully registered!'});
+        res.json({success: true, msg:'server: User successfully registered!'});
         }
     })
 });
@@ -46,7 +48,8 @@ router.post('/updateProfile', (req, res, next) => {
         userID: req.body.userID,
         site: req.body.site,
         clinic: req.body.clinic,
-        status: req.body.status
+        status: req.body.status,
+        displayName: req.body.displayName
     };
 
     User.updateProfile(updateInfo, (err) => {
@@ -68,16 +71,20 @@ router.post('/authenticate', (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
 
+    // Find the user by user name or throw an error
     User.getUserByUsername(username||'', (err, user) => {
         if(err) throw err;
 
         if(!user) {
-            return res.json({success:false, msg:'User not found...'})
+            return res.json({success:false, msg:'server: User not found...'})
         }
 
+        // compare the input password and the found user's password
         User.comparePassword(password, user.password||'', (err, isMatch) => {
             if(err) throw err;
             if(isMatch){
+
+                //create a token with the user data
                 const token = jwt.sign({data:user}, config.secret, {
                     expiresIn: 604800, //1 week in seconds
                 });
@@ -90,13 +97,14 @@ router.post('/authenticate', (req, res, next) => {
                         firstName: user.firstName,
                         lastName: user.lastName,
                         username: user.username,
+                        displayName: user.displayName,
                         site: user.site,
                         clinic: user.clinic,
                         userPermission: user.status
                     }
                 });
             }else {
-                return res.json({success: false, msg: 'Wrong password...'})
+                return res.json({success: false, msg: 'server: incorrect login information...'})
             }
         });
     })

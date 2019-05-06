@@ -34,7 +34,8 @@ const UserSchema = mongoose.Schema({
         type: String
     }
 });
-// Export this model as an object
+
+// Export this model that can be used later
 const User = module.exports = mongoose.model('User', UserSchema);
 
 // Find a user by a given id
@@ -48,7 +49,7 @@ module.exports.getUserByUsername = function(username, callback) {
     User.findOne(query, callback);
 }
 
-// Return many users by a gen username 
+// Return many users by a given username 
 module.exports.searchUsersByUsername = function(username, callback) {
     const query = {username: username}
     User.find(query, callback)
@@ -56,18 +57,24 @@ module.exports.searchUsersByUsername = function(username, callback) {
 
 // Add a new User to the database
 module.exports.addUser = function(newUser, callback){
-
+    
     bcrypt.genSalt(10, (err, salt) => {
-
-        //Function that hash and salts the given user password
+        
+        // Function that hash and salts the given user password
         bcrypt.hash(newUser.password, salt, (err, hash) => {
             if(err) throw err;
             newUser.password = hash;
-
-            //Mongoose function that saves the user to the database
+            
+            // Mongoose function that saves the user to the database
             newUser.save(callback)
         })
     });
+}
+
+// Delete a user of a specified ID
+module.exports.removeUser = function(userID, callback) {
+    const query = {userID: userID}
+    User.findByIdAndDelete(query, callback)
 }
 
 // Take a password and compare it to the stored hashed password
