@@ -6,6 +6,8 @@
 
 **Version:** 0.05 (BETA UNRELEASED)
 
+**Sprint:** Athena
+
 This application uses the following technologies
 
 **Frontend:** Angular2
