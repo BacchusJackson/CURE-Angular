@@ -10,18 +10,18 @@
 
 This application uses the following technologies
 
-**Frontend:** Angular2
+**Frontend:** Angular
 
 **Backend:** NodeJs w/ Express
 
-**Database:** local MongoDB Server
+**Database:** MongoDB Server in AWS
 
 
 ## File Structure
 ### Config
 Contains database and passport configurations for authentication
 ### cure-app
-Contains all of the Angular2 source code
+Contains all of the Angular source code
 ### models
 Contains the mongoDB models handled by Mongoose
 Also handles internal api calls
