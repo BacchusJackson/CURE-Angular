@@ -8,10 +8,11 @@ import { ItemsModule } from './items/items.module';
 import { UsersService } from './users/users.service';
 import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
+import { EntriesModule } from './entries/entries.module';
 import config from './config/keys';
 
 @Module({
-  imports: [ItemsModule, MongooseModule.forRoot(config.localDatabase), UsersModule],
+  imports: [ItemsModule, MongooseModule.forRoot(config.localDatabase), UsersModule, EntriesModule],
   controllers: [AppController, ItemsController, UsersController],
   providers: [AppService, ItemsService, UsersService],
 })

@@ -9,7 +9,6 @@ import * as bcrypt from 'bcryptjs';
 export class UsersService {
     constructor(@InjectModel('User') private readonly userModel:Model<User>) {}
     
-    
     async findAll(): Promise<User[]> {
         return await this.userModel.find();
     }
@@ -31,22 +30,26 @@ export class UsersService {
         candidateUser.clinic = candidateUser.clinic || 'default';
         candidateUser.status = candidateUser.status || 'standard'
 
-        // Hash the submitted password
-        bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(candidateUser.password, salt, (err, hash) => {
-                if(err) throw err;
-                // change the password and save
-                candidateUser.password = hash;
-                candidateUser.save();
-            })
-        })
+        // Hash the user's inputted password
+        let salt = bcrypt.genSaltSync(10);
+        let hash = bcrypt.hashSync(candidateUser.password, salt);
 
-        return await candidateUser
+        candidateUser.password = hash;
+        return await candidateUser.save();
     }
 
-    //fix update user... NOTES
-
     async updateUser(id: string, user: User): Promise<User> {
-        return await this.userModel.updateOne({id: id}, user)
+        //if the new information includes a password
+        if(user.password) {
+            // Hash the user's inputted password
+            let salt = bcrypt.genSaltSync(10);
+            let hash = bcrypt.hashSync(user.password, salt);
+            
+            //store the password in the user object
+            user.password = hash;
+        }
+
+        return await this.userModel.updateOne({_id:id}, user)
+
     }
 }
