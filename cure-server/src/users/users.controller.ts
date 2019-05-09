@@ -3,7 +3,7 @@ import { UsersService } from "./users.service";
 import { User } from './interfaces/user.interface';
 import { CreateUserDto } from "./dto/create-user.dto";
 
-
+//controls the routes and directs calls to the service
 @Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
